@@ -7,10 +7,27 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
-  build:
+  secrets-scan:
+    name: Secrets Scan (GitLeaks)
     runs-on: ubuntu-latest
+    steps:
+      - name: Kodni yuklab olish (butun tarix bilan)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: GitLeaks bilan skanerlash
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    name: Docker image yig'ish
+    runs-on: ubuntu-latest
+    needs: secrets-scan
     steps:
       - name: Kodni yuklab olish
         uses: actions/checkout@v4
