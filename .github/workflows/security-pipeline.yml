@@ -34,7 +34,7 @@ jobs:
       - name: Semgrep bilan skanerlash
         uses: semgrep/semgrep-action@v1
         with:
-          config: p/default
+          config: p/security-audit
 
   build:
     name: Docker image yig'ish
