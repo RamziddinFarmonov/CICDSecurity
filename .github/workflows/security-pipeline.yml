@@ -24,10 +24,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  sast-scan:
+    name: SAST Scan (Semgrep)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: Semgrep bilan skanerlash
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: p/default
+
   build:
     name: Docker image yig'ish
     runs-on: ubuntu-latest
-    needs: secrets-scan
+    needs: [secrets-scan, sast-scan]
     steps:
       - name: Kodni yuklab olish
         uses: actions/checkout@v4
