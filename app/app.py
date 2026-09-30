@@ -1,3 +1,7 @@
+
+# VAQTINCHALIK TEST — GitLeaks buni ushlashi kerak
+AWS_SECRET_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE7wJalrXUtnFEMI/K7MDENG/bPxRfiCY"
+
 from flask import Flask, jsonify
 
 app = Flask(__name__)
