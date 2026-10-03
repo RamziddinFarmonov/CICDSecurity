@@ -1,4 +1,4 @@
-import os
+import subprocess
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -16,10 +16,14 @@ def health():
 
 @app.route("/ping")
 def ping():
-    # VAQTINCHALIK TEST — Semgrep buni ushlashi kerak (command injection)
     host = request.args.get("host", "localhost")
-    result = os.system("ping -c 1 " + host)
-    return jsonify(result=result)
+    result = subprocess.run(
+        ["ping", "-c", "1", host],
+        capture_output=True,
+        text=True,
+        timeout=5,
+    )
+    return jsonify(output=result.stdout)
 
 
 if __name__ == "__main__":
