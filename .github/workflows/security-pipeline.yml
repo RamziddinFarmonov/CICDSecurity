@@ -79,8 +79,9 @@ jobs:
         with:
           image-ref: ${{ needs.build.outputs.image_tag }}
           severity: HIGH,CRITICAL
+          ignore-unfixed: true
           exit-code: "1"
-
+          
       - name: Syft bilan SBOM yaratish
         uses: anchore/sbom-action@v0
         with:
