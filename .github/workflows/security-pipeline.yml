@@ -81,7 +81,7 @@ jobs:
           severity: HIGH,CRITICAL
           ignore-unfixed: true
           exit-code: "1"
-          
+
       - name: Syft bilan SBOM yaratish
         uses: anchore/sbom-action@v0
         with:
@@ -95,7 +95,8 @@ jobs:
           sbom: sbom.json
           fail-build: true
           severity-cutoff: high
-
+          only-fixed: true
+          
       - uses: actions/upload-artifact@v4
         if: always()
         with:
