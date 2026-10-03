@@ -92,11 +92,11 @@ jobs:
       - name: Grype bilan SBOM'ni skanerlash
         uses: anchore/scan-action@v4
         with:
-          sbom: sbom.json
+          image: ${{ needs.build.outputs.image_tag }}
           fail-build: true
           severity-cutoff: high
           only-fixed: true
-          
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
