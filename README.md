@@ -1,0 +1,1 @@
+Test: branch protection ishlashini tekshirish uchun.
